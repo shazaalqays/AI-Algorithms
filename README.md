@@ -119,4 +119,136 @@ switch(ch)
 ### NOTE
 We will continue explaining the `8_puzzle.py` file since all the files are similar except some changes to fit the size of the puzzle.
 # Generate state
-Each state will be represented by a node object which consist of some atribuites and methods. The attribuites are state is currently in, parent node, action "in which direction the move is going to be done", depth in the search tree, costs, and children nodes for the current node so we can move from one node to another.
+Each state will be represented by a node object which consist of some atribuites and methods. The attribuites are state is currently in, parent node, action "in which direction the move is going to be done", depth in the search tree, costs, and children nodes for the current node so we can move from one node to another. We have four possible moves, so we declare 4 functions to do that, so before any move we will check if the move is possible or not. If possible we will return the new state and the tile that being moved, and if not we will return false. Also we have functions to calculate the heuristics. See following calss `node`.
+```
+class Node():
+    def __init__(self, state, parent, action, depth, step_cost, path_cost, heuristic_cost):
+        self.state = state
+        self.parent = parent  # parent node
+        self.action = action  # move up, left, down, right
+        self.depth = depth  # depth of the node in the tree
+        self.step_cost = step_cost  # g(n), the cost to take the step
+        self.path_cost = path_cost  # accumulated g(n), the cost to reach the current node
+        self.heuristic_cost = heuristic_cost  # h(n), cost to reach goal state from the current node
+
+        # children node
+        self.move_up = None
+        self.move_left = None
+        self.move_down = None
+        self.move_right = None
+        
+    # see if moving down is valid
+    def try_move_down(self):
+        # index of the empty tile
+        zero_index = [i[0] for i in np.where(self.state == 0)]
+        if zero_index[0] == 0:
+            return False
+        else:
+            up_value = self.state[zero_index[0] - 1, zero_index[1]]  # value of the upper tile
+            new_state = self.state.copy()
+            new_state[zero_index[0], zero_index[1]] = up_value
+            new_state[zero_index[0] - 1, zero_index[1]] = 0
+            return new_state, up_value
+    
+     # see if moving right is valid
+    def try_move_right(self):
+        zero_index = [i[0] for i in np.where(self.state == 0)]
+        if zero_index[1] == 0:
+            return False
+        else:
+            left_value = self.state[zero_index[0], zero_index[1] - 1]  # value of the left tile
+            new_state = self.state.copy()
+            new_state[zero_index[0], zero_index[1]] = left_value
+            new_state[zero_index[0], zero_index[1] - 1] = 0
+            return new_state, left_value
+   
+
+    # see if moving up is valid
+    def try_move_up(self):
+        zero_index = [i[0] for i in np.where(self.state == 0)]
+        if zero_index[0] == 2:
+            return False
+        else:
+            lower_value = self.state[zero_index[0] + 1, zero_index[1]]  # value of the lower tile
+            new_state = self.state.copy()
+            new_state[zero_index[0], zero_index[1]] = lower_value
+            new_state[zero_index[0] + 1, zero_index[1]] = 0
+            return new_state, lower_value
+
+    # see if moving left is valid
+    def try_move_left(self):
+        zero_index = [i[0] for i in np.where(self.state == 0)]
+        if zero_index[1] == 2:
+            return False
+        else:
+            right_value = self.state[zero_index[0], zero_index[1] + 1]  # value of the right tile
+            new_state = self.state.copy()
+            new_state[zero_index[0], zero_index[1]] = right_value
+            new_state[zero_index[0], zero_index[1] + 1] = 0
+            return new_state, right_value
+
+    # return user specified heuristic cost
+    def get_h_cost(self, new_state, goal_state, heuristic_function, path_cost, depth):
+        if heuristic_function == 'num_misplaced':
+            return self.h_misplaced_cost(new_state, goal_state)
+        elif heuristic_function == 'manhattan':
+            return self.h_manhattan_cost(new_state, goal_state)
+
+    # return heuristic cost: number of misplaced tiles
+    def h_misplaced_cost(self, new_state, goal_state):
+        cost = np.sum(new_state != goal_state) - 1  # minus 1 to exclude the empty tile
+        if cost > 0:
+            return cost
+        else:
+            return 0  # when all tiles matches
+
+    # return heuristic cost: sum of Manhattan distance to reach the goal state
+    def h_manhattan_cost(self, new_state, goal_state):
+        current = new_state
+        # digit and coordinates they are supposed to be
+        goal_position_dic = {1: (0, 0), 2: (0, 1), 3: (0, 2), 4: (1, 0), 5: (1, 1), 6: (1, 2), 7: (2, 0), 8: (2, 1),
+                             0: (2, 2)}
+        sum_manhattan = 0
+        for i in range(3):
+            for j in range(3):
+                if current[i, j] != 0:
+                    sum_manhattan += sum(abs(a - b) for a, b in zip((i, j), goal_position_dic[current[i, j]]))
+        return sum_manhattan
+```
+And we have a function to print the path. Once the goal node is found, trace back to the root node and print out the path
+```
+def print_path(self):
+        # create FILO stacks to place the trace
+        state_trace = [self.state]
+        action_trace = [self.action]
+        depth_trace = [self.depth]
+        step_cost_trace = [self.step_cost]
+        path_cost_trace = [self.path_cost]
+        heuristic_cost_trace = [self.heuristic_cost]
+
+        # add node information as tracing back up the tree
+        while self.parent:
+            self = self.parent
+            state_trace.append(self.state)
+            action_trace.append(self.action)
+            depth_trace.append(self.depth)
+            step_cost_trace.append(self.step_cost)
+            path_cost_trace.append(self.path_cost)
+            heuristic_cost_trace.append(self.heuristic_cost)
+
+        # print out the path
+        step_counter = 0
+        while state_trace:
+            print('step', step_counter)
+            print(state_trace.pop())
+            print('action=', action_trace.pop(), ', depth=', str(depth_trace.pop()), \
+                  ', step cost=', str(step_cost_trace.pop()), ', total_cost=', \
+                  str(path_cost_trace.pop() + heuristic_cost_trace.pop()), '\n')
+            step_counter += 1
+        print("Total Number of steps: ",step_counter-1) # outside while loop, counter incremented by one
+```
+## BFS
+Breadth-first search (BFS) is an algorithm for traversing or searching tree or graph data structures. It starts at the tree root and explores all of the neighbor nodes at the present depth prior to moving on to the nodes at the next depth level.
+### Pseudocode
+* While queue is not empty
+** Pop the first element from queue
