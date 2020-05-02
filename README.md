@@ -247,8 +247,8 @@ def print_path(self):
             step_counter += 1
         print("Total Number of steps: ",step_counter-1) # outside while loop, counter incremented by one
 ```
-## BFS
-Breadth-first search (BFS) is an algorithm for traversing or searching tree or graph data structures. It starts at the tree root and explores all of the neighbor nodes at the present depth prior to moving on to the nodes at the next depth level.
+## BFS algorithm
+Breadth-first search is an algorithm for traversing or searching tree or graph data structures. It starts at the tree root and explores all of the neighbor nodes at the present depth prior to moving on to the nodes at the next depth level.
 ### Pseudocode
 ```
 While queue is not empty
@@ -259,7 +259,7 @@ While queue is not empty
     If equal 
         Print the solution path
     If not equal
-        Try possible moves
+        Try possible move
         Add it to the end of the queue
 ```
 ### Python code
@@ -356,3 +356,345 @@ def breadth_first_search(self, goal_state):
                 print('Time spent: %0.2gs' % (time.time() - start))
                 return False
 ```
+## DFS algorithm
+Depth-first search is an algorithm for traversing or searching tree or graph data structures. The algorithm starts at the root node and explores as far as possible along each branch before backtracking.
+### Pseudocode
+```
+While queue is not empty
+* Pop the first element from queue
+* Record its depth and path cost
+* Add it to visited set
+* Compare the current state with goal state
+    If equal 
+        Print the solution path
+    If not equal
+        Try possible move
+        Insert it to the beginning of the queue
+```
+### Python code
+```
+    def depth_first_search(self, goal_state):
+        start = time.time()
+        queue = [self] # queue of found but unvisited nodes, FILO
+        queue_num_nodes_popped = 0 # number of nodes popped off the queue, measuring time performance
+        queue_max_length = 1 # max number of nodes in the queue, measuring space performance
+        depth_queue = [0] # queue of node depth
+        path_cost_queue = [0] # queue for path cost
+        visited = set([]) # record visited states
+
+        while queue:
+            # update maximum length of the queue
+            if len(queue) > queue_max_length:
+                queue_max_length = len(queue)
+
+            current_node = queue.pop(0) # select and remove the first node in the queue
+            queue_num_nodes_popped += 1
+            current_depth = depth_queue.pop(0)  # select and remove the depth for current node
+
+            if current_depth <= 10:             # Condition for declaring the puzzle unsolvable.
+                current_path_cost = path_cost_queue.pop(0)  # select and remove the path cost for reaching current node
+                visited.add(tuple(current_node.state.reshape(1, 9)[0]))  # avoid repeated state, which is represented as a tuple
+                # when the goal state is found, trace back to the root node and print out the path
+                if np.array_equal(current_node.state, goal_state):
+                    current_node.print_path()
+                    print("number of Nodes in Queue: ", len(queue))
+                    print("number of Nodes in Visited: ", len(visited))
+                    print('Time performance:', str(queue_num_nodes_popped), 'nodes popped off the queue.')
+                    print('Space performance:', str(queue_max_length), 'nodes in the queue at its max.')
+                    print('Time spent: %0.2gs' % (time.time() - start))
+                    return True
+
+                else:
+                    # see if moving upper tile down is a valid move
+                    if current_node.try_move_down():
+                        new_state,up_value = current_node.try_move_down()
+                        # check if the resulting node is already visited
+                        if tuple(new_state.reshape(1,9)[0]) not in visited:
+                            # create a new child node
+                            current_node.move_down = Node(state=new_state,parent=current_node,action='down',depth=current_depth+1,\
+                                              step_cost=up_value,path_cost=current_path_cost+up_value,heuristic_cost=0)
+                            queue.insert(0,current_node.move_down)
+                            depth_queue.insert(0,current_depth+1)
+                            path_cost_queue.insert(0,current_path_cost+up_value)
+
+                    # see if moving left tile to the right is a valid move
+                    if current_node.try_move_right():
+                        new_state,left_value = current_node.try_move_right()
+                        # check if the resulting node is already visited
+                        if tuple(new_state.reshape(1,9)[0]) not in visited:
+                            # create a new child node
+                            current_node.move_right = Node(state=new_state,parent=current_node,action='right',depth=current_depth+1,\
+                                              step_cost=left_value,path_cost=current_path_cost+left_value,heuristic_cost=0)
+                            queue.insert(0,current_node.move_right)
+                            depth_queue.insert(0,current_depth+1)
+                            path_cost_queue.insert(0,current_path_cost+left_value)
+
+                    # see if moving lower tile up is a valid move
+                    if current_node.try_move_up():
+                        new_state,lower_value = current_node.try_move_up()
+                        # check if the resulting node is already visited
+                        if tuple(new_state.reshape(1,9)[0]) not in visited:
+                            # create a new child node
+                            current_node.move_up = Node(state=new_state,parent=current_node,action='up',depth=current_depth+1,\
+                                              step_cost=lower_value,path_cost=current_path_cost+lower_value,heuristic_cost=0)
+                            queue.insert(0,current_node.move_up)
+                            depth_queue.insert(0,current_depth+1)
+                            path_cost_queue.insert(0,current_path_cost+lower_value)
+
+                    # see if moving right tile to the left is a valid move
+                    if current_node.try_move_left():
+                        new_state,right_value = current_node.try_move_left()
+                        # check if the resulting node is already visited
+                        if tuple(new_state.reshape(1,9)[0]) not in visited:
+                            # create a new child node
+                            current_node.move_left = Node(state=new_state,parent=current_node,action='left',depth=current_depth+1,\
+                                              step_cost=right_value,path_cost=current_path_cost+right_value,heuristic_cost=0)
+                            queue.insert(0,current_node.move_left)
+                            depth_queue.insert(0,current_depth+1)
+                            path_cost_queue.insert(0,current_path_cost+right_value)
+            else:
+                print("Max depth exceeded")
+                print('Time spent: %0.2gs' % (time.time() - start))
+                return False
+```
+## Iterative deepening DFS algorithm
+iterative deepening depth-first search is a state space/graph search strategy in which a depth-limited version of depth-first search is run repeatedly with increasing depth limits until the goal is found.
+### Pseudocode
+```
+While queue is not empty
+* Pop the first element from queue
+* Record its depth and path cost
+* Add it to visited set
+* Compare the current state with goal state
+    If equal 
+        Print the solution path
+    If not equal
+        Try possible move
+        Insert it to the beginning of the queue
+```
+### Python code
+```
+def iterative_deepening_DFS(self, goal_state):
+        start = time.time()
+        queue_num_nodes_popped = 0  # number of nodes popped off the queue, measuring time performance
+        queue_max_length = 1  # max number of nodes in the queue, measuring space performance
+        # search the tree that's 10 levels in depth
+        for depth_limit in range(10):
+            queue = [self]  # queue of found but unvisited nodes, FILO
+            depth_queue = [0]  # queue of node depth
+            path_cost_queue = [0]  # queue for path cost
+            visited = set([])  # record visited states
+
+            while queue:
+                # update maximum length of the queue
+                if len(queue) > queue_max_length:
+                    queue_max_length = len(queue)
+
+                current_node = queue.pop(0)  # select and remove the first node in the queue
+                queue_num_nodes_popped += 1
+                current_depth = depth_queue.pop(0)  # select and remove the depth for current node
+                current_path_cost = path_cost_queue.pop(0) # select and remove the path cost for reaching current node
+                visited.add(tuple(current_node.state.reshape(1, 9)[0]))  # add state, which is represented as a tuple
+
+                # when the goal state is found, trace back to the root node and print out the path
+                if np.array_equal(current_node.state, goal_state):
+                    current_node.print_path()
+                    print("number of Nodes in Queue: ", len(queue))
+                    print('Time performance:', str(queue_num_nodes_popped), 'nodes popped off the queue.')
+                    print('Space performance:', str(queue_max_length), 'nodes in the queue at its max.')
+                    print('Time spent: %0.2gs' % (time.time() - start))
+                    return True
+                else:
+                    if current_depth < depth_limit:
+                        # see if moving upper tile down is a valid move
+                        if current_node.try_move_down():
+                            new_state, up_value = current_node.try_move_down()
+                            # check if the resulting node is already visited
+                            if tuple(new_state.reshape(1, 9)[0]) not in visited:
+                                # create a new child node
+                                current_node.move_down = Node(state=new_state, parent=current_node, action='down',
+                                                              depth=current_depth + 1,
+                                                              step_cost=up_value,
+                                                              path_cost=current_path_cost + up_value, heuristic_cost=0)
+                                queue.insert(0, current_node.move_down)
+                                depth_queue.insert(0, current_depth + 1)
+                                path_cost_queue.insert(0, current_path_cost + up_value)
+
+                        # see if moving left tile to the right is a valid move
+                        if current_node.try_move_right():
+                            new_state, left_value = current_node.try_move_right()
+                            # check if the resulting node is already visited
+                            if tuple(new_state.reshape(1, 9)[0]) not in visited:
+                                # create a new child node
+                                current_node.move_right = Node(state=new_state, parent=current_node, action='right',
+                                                               depth=current_depth + 1,
+                                                               step_cost=left_value,
+                                                               path_cost=current_path_cost + left_value,
+                                                               heuristic_cost=0)
+                                queue.insert(0, current_node.move_right)
+                                depth_queue.insert(0, current_depth + 1)
+                                path_cost_queue.insert(0, current_path_cost + left_value)
+
+                        # see if moving lower tile up is a valid move
+                        if current_node.try_move_up():
+                            new_state, lower_value = current_node.try_move_up()
+                            # check if the resulting node is already visited
+                            if tuple(new_state.reshape(1, 9)[0]) not in visited:
+                                # create a new child node
+                                current_node.move_up = Node(state=new_state, parent=current_node, action='up',
+                                                            depth=current_depth + 1,
+                                                            step_cost=lower_value,
+                                                            path_cost=current_path_cost + lower_value, heuristic_cost=0)
+                                queue.insert(0, current_node.move_up)
+                                depth_queue.insert(0, current_depth + 1)
+                                path_cost_queue.insert(0, current_path_cost + lower_value)
+
+                        # see if moving right tile to the left is a valid move
+                        if current_node.try_move_left():
+                            new_state, right_value = current_node.try_move_left()
+                            # check if the resulting node is already visited
+                            if tuple(new_state.reshape(1, 9)[0]) not in visited:
+                                # create a new child node
+                                current_node.move_left = Node(state=new_state, parent=current_node, action='left',
+                                                              depth=current_depth + 1,
+                                                              step_cost=right_value,
+                                                              path_cost=current_path_cost + right_value,
+                                                              heuristic_cost=0)
+                                queue.insert(0, current_node.move_left)
+                                depth_queue.insert(0, current_depth + 1)
+                                path_cost_queue.insert(0, current_path_cost + right_value)
+            if depth_limit>=9:
+                print("Max Limit Reached")
+                print('Time spent: %0.2gs' % (time.time() - start))
+```
+## A* algorithm
+A* Search algorithm is one of the best and popular technique used in path-finding and graph traversals. 
+### Pseudocode
+```
+While queue is not empty
+* Sort the queue based on the cost
+* Sort the depth queue
+* Sort the path cost queue
+* Add it to visited set
+* Compare the current state with goal state
+    If equal 
+        Print the solution path
+    If not equal
+        Try possible move
+        Add it to the end of the queue with the cost that is used
+```
+### Python code
+```
+def a_star_search(self, goal_state, heuristic_function):
+        start = time.time()
+        queue = [(self, 0)]  # queue of (found but unvisited nodes, path cost+heuristic cost), ordered by the second element
+        queue_num_nodes_popped = 0  # number of nodes popped off the queue, measuring time performance
+        queue_max_length = 1  # max number of nodes in the queue, measuring space performance
+        depth_queue = [(0, 0)]  # queue of node depth, (depth, path_cost+heuristic cost)
+        path_cost_queue = [(0, 0)]  # queue for path cost, (path_cost, path_cost+heuristic cost)
+        visited = set([])  # record visited states
+
+        while queue:
+            # sort queue based on path_cost+heuristic cost, in ascending order
+            queue = sorted(queue, key=lambda x: x[1])
+            depth_queue = sorted(depth_queue, key=lambda x: x[1])
+            path_cost_queue = sorted(path_cost_queue, key=lambda x: x[1])
+            # update maximum length of the queue
+            if len(queue) > queue_max_length:
+                queue_max_length = len(queue)
+
+            current_node = queue.pop(0)[0]  # select and remove the first node in the queue
+            queue_num_nodes_popped += 1
+            current_depth = depth_queue.pop(0)[0]  # select and remove the depth for current node
+
+            if current_depth<=10:
+                current_path_cost = path_cost_queue.pop(0)[0]  # # select and remove the path cost for reaching current node
+                visited.add(tuple(current_node.state.reshape(1, 9)[0]))  # avoid repeated state, which is represented as a tuple
+                # when the goal state is found, trace back to the root node and print out the path
+                if np.array_equal(current_node.state, goal_state):
+                    current_node.print_path()
+                    print("number of Nodes in Queue: ",len(queue))
+                    print('Time performance:', str(queue_num_nodes_popped), 'nodes popped off the queue.')
+                    print('Space performance:', str(queue_max_length), 'nodes in the queue at its max.')
+                    print('Time spent: %0.2gs' % (time.time() - start))
+                    return True
+                else:
+                    # see if moving upper tile down is a valid move
+                    if current_node.try_move_down():
+                        new_state, up_value = current_node.try_move_down()
+                        # check if the resulting node is already visited
+                        if tuple(new_state.reshape(1, 9)[0]) not in visited:
+                            path_cost = current_path_cost + up_value
+                            depth = current_depth + 1
+                            # get heuristic cost
+                            h_cost = self.get_h_cost(new_state, goal_state, heuristic_function, path_cost, depth)
+                            # create a new child node
+                            total_cost = path_cost + h_cost
+                            current_node.move_down = Node(state=new_state, parent=current_node, action='down', depth=depth, \
+                                                      step_cost=up_value, path_cost=path_cost, heuristic_cost=h_cost)
+                            queue.append((current_node.move_down, total_cost))
+                            depth_queue.append((depth, total_cost))
+                            path_cost_queue.append((path_cost, total_cost))
+
+                    # see if moving left tile to the right is a valid move
+                    if current_node.try_move_right():
+                        new_state, left_value = current_node.try_move_right()
+                        # check if the resulting node is already visited
+                        if tuple(new_state.reshape(1, 9)[0]) not in visited:
+                            path_cost = current_path_cost + left_value
+                            depth = current_depth + 1
+                            # get heuristic cost
+                            h_cost = self.get_h_cost(new_state, goal_state, heuristic_function, path_cost, depth)
+                            # create a new child node
+                            total_cost = path_cost + h_cost
+                            current_node.move_right = Node(state=new_state, parent=current_node, action='right',
+                                                       depth=depth,
+                                                       step_cost=left_value, path_cost=path_cost, heuristic_cost=h_cost)
+                            queue.append((current_node.move_right, total_cost))
+                            depth_queue.append((depth, total_cost))
+                            path_cost_queue.append((path_cost, total_cost))
+
+                    # see if moving lower tile up is a valid move
+                    if current_node.try_move_up():
+                        new_state, lower_value = current_node.try_move_up()
+                        # check if the resulting node is already visited
+                        if tuple(new_state.reshape(1, 9)[0]) not in visited:
+                            path_cost = current_path_cost + lower_value
+                            depth = current_depth + 1
+                            # get heuristic cost
+                            h_cost = self.get_h_cost(new_state, goal_state, heuristic_function, path_cost, depth)
+                            # create a new child node
+                            total_cost = path_cost + h_cost
+                            current_node.move_up = Node(state=new_state, parent=current_node, action='up', depth=depth,
+                                                    step_cost=lower_value, path_cost=path_cost, heuristic_cost=h_cost)
+                            queue.append((current_node.move_up, total_cost))
+                            depth_queue.append((depth, total_cost))
+                            path_cost_queue.append((path_cost, total_cost))
+
+                    # see if moving right tile to the left is a valid move
+                    if current_node.try_move_left():
+                        new_state, right_value = current_node.try_move_left()
+                        # check if the resulting node is already visited
+                        if tuple(new_state.reshape(1, 9)[0]) not in visited:
+                            path_cost = current_path_cost + right_value
+                            depth = current_depth + 1
+                            # get heuristic cost
+                            h_cost = self.get_h_cost(new_state, goal_state, heuristic_function, path_cost, depth)
+                            # create a new child node
+                            total_cost = path_cost + h_cost
+                            current_node.move_left = Node(state=new_state, parent=current_node, action='left', depth=depth,
+                                                      step_cost=right_value, path_cost=path_cost, heuristic_cost=h_cost)
+                            queue.append((current_node.move_left, total_cost))
+                            depth_queue.append((depth, total_cost))
+                            path_cost_queue.append((path_cost, total_cost))
+            else:
+                print("MAX DEPTH REACHED")
+                print('Time spent: %0.2gs' % (time.time() - start))
+                print('Time performance:', str(queue_num_nodes_popped), 'nodes popped off the queue.')
+                print('Space performance:', str(queue_max_length), 'nodes in the queue at its max.')
+                return False
+```
+# Conclusion
+When the depth of the tree is high all 4 algorithms are slow in finding the solution but when depth is not too high they are similar to each other but A* algorithm shows that it is faster.
+# Prepared by
+Chaza Alkis 13011908 and Derya Akcakaya 13011053
