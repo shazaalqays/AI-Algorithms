@@ -116,7 +116,7 @@ def switch(ch):
         switch(ch2)
 switch(ch)
 ```
-##### NOTE
+### NOTE
 We will continue explaining the `8_puzzle.py` file since all the files are similar except some changes to fit the size of the puzzle.
 # Generate state
-Each state will be represented by a node 
+Each state will be represented by a node object which consist of some atribuites and methods. The attribuites are state is currently in, parent node, action "in which direction the move is going to be done", depth in the search tree, costs, and children nodes for the current node so we can move from one node to another.
