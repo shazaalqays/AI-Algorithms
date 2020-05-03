@@ -703,7 +703,27 @@ After checking everything let's run `all_puzzles.py`.
 ![Result2](https://github.com/shazaalqays/AI-Project/blob/master/pics/15-bfs.jpg)
 24-puzzle:
 ![Result3](https://github.com/shazaalqays/AI-Project/blob/master/pics/24-bfs.jpg)
-
+## DFS results
+8-puzzle:
+![Result4](https://github.com/shazaalqays/AI-Project/blob/master/pics/8-dfs.jpg)
+15-puzzle:
+![Result5](https://github.com/shazaalqays/AI-Project/blob/master/pics/15-dfs.jpg)
+24-puzzle:
+![Result6](https://github.com/shazaalqays/AI-Project/blob/master/pics/24-dfs.jpg)
+## ID-DFS results
+8-puzzle:
+![Result7](https://github.com/shazaalqays/AI-Project/blob/master/pics/8-iddfs.jpg)
+15-puzzle:
+![Result8](https://github.com/shazaalqays/AI-Project/blob/master/pics/15-iddfs.jpg)
+24-puzzle:
+![Result9](https://github.com/shazaalqays/AI-Project/blob/master/pics/24-iddfs.jpg)
+## A* results
+8-puzzle:
+![Result10](https://github.com/shazaalqays/AI-Project/blob/master/pics/8-astar.jpg)
+15-puzzle:
+![Result11](https://github.com/shazaalqays/AI-Project/blob/master/pics/15-astar.jpg)
+24-puzzle:
+![Result12](https://github.com/shazaalqays/AI-Project/blob/master/pics/24-astar.jpg)
 # Conclusion
 When the depth of the tree is high all 4 algorithms are slow in finding the solution but when depth is not too high they are similar to each other but A* algorithm shows that it is faster.
 # Prepared by
