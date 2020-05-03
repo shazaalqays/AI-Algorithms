@@ -695,7 +695,7 @@ def a_star_search(self, goal_state, heuristic_function):
                 return False
 ```
 # Results
-After checking everything let's run `all_puzzles.py`.
+After checking everything let's run `all_puzzles.py`. For the results I used easy puzzles to solve in order to save time.
 ## BFS results
 8-puzzle: <br/><br/>
 ![Result1](https://github.com/shazaalqays/AI-Project/blob/master/pics/8-bfs.jpg) <br/><br/>
