@@ -725,6 +725,7 @@ After checking everything let's run `all_puzzles.py`.
 24-puzzle: <br/>
 ![Result12](https://github.com/shazaalqays/AI-Project/blob/master/pics/24-astar.jpg) <br/>
 # Conclusion
-When the depth of the tree is high all 4 algorithms are slow in finding the solution but when depth is not too high they are similar to each other but A* algorithm shows that it is faster.
+Speed chart: <br/>
+![Result113](https://github.com/shazaalqays/AI-Project/blob/master/pics/speed.jpg) <br/>
 # Prepared by
 Chaza Alkis 13011908 and Derya Akcakaya 13011053
