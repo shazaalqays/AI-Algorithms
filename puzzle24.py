@@ -145,7 +145,7 @@ class Node():
             queue_num_nodes_popped += 1
             current_depth = depth_queue.pop(0)  # select and remove the depth for current node
 
-            if current_depth <= 20: # Condition for declaring the puzzle unsolvable.
+            if current_depth <= 30: # Condition for declaring the puzzle unsolvable.
                 current_path_cost = path_cost_queue.pop(0)  # select and remove the path cost for reaching current node
                 visited.add(
                     tuple(current_node.state.reshape(1, 25)[0]))  # avoid repeated state, which is represented as a tuple
@@ -238,7 +238,7 @@ class Node():
             queue_num_nodes_popped += 1
             current_depth = depth_queue.pop(0)  # select and remove the depth for current node
 
-            if current_depth <= 20:             # Condition for declaring the puzzle unsolvable.
+            if current_depth <= 30:             # Condition for declaring the puzzle unsolvable.
                 current_path_cost = path_cost_queue.pop(0)  # select and remove the path cost for reaching current node
                 visited.add(tuple(current_node.state.reshape(1, 25)[0]))  # avoid repeated state, which is represented as a tuple
                 # when the goal state is found, trace back to the root node and print out the path
@@ -309,7 +309,7 @@ class Node():
         queue_num_nodes_popped = 0  # number of nodes popped off the queue, measuring time performance
         queue_max_length = 1  # max number of nodes in the queue, measuring space performance
         # search the tree that's 100 levels in depth
-        for depth_limit in range(20):
+        for depth_limit in range(30):
             queue = [self]  # queue of found but unvisited nodes, FILO
             depth_queue = [0]  # queue of node depth
             path_cost_queue = [0]  # queue for path cost
@@ -394,7 +394,7 @@ class Node():
                                 queue.insert(0, current_node.move_left)
                                 depth_queue.insert(0, current_depth + 1)
                                 path_cost_queue.insert(0, current_path_cost + right_value)
-            if depth_limit>=19:
+            if depth_limit>=29:
                 print("Max Limit Reached")
                 print('Time spent: %0.2gs' % (time.time() - start))
 
@@ -422,7 +422,7 @@ class Node():
             queue_num_nodes_popped += 1
             current_depth = depth_queue.pop(0)[0]  # select and remove the depth for current node
 
-            if current_depth<=20:
+            if current_depth<=30:
                 current_path_cost = path_cost_queue.pop(0)[0]  # # select and remove the path cost for reaching current node
                 visited.add(tuple(current_node.state.reshape(1, 25)[0]))  # avoid repeated state, which is represented as a tuple
                 # when the goal state is found, trace back to the root node and print out the path

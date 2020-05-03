@@ -47,7 +47,7 @@ def switch(ch):
         # for i in range(16):
         #     test.append(int(input("Element: ")))
         # test = np.array(test).reshape(4,4)
-        test = np.array([1,2,3,4,5,6,7,8,13,10,11,12,9,0,14,15]).reshape(4,4)
+        test = np.array([1,2,3,4,5,6,7,8,9,10,11,12,0,13,14,15]).reshape(4,4)
         initial_state = test
         # our goal state is:
         goal_state = np.array([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,0]).reshape(4,4)
