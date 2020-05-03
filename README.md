@@ -728,7 +728,7 @@ After checking everything let's run `all_puzzles.py`.
 In the following chart we notice that,<br/> 
 For 8-puzzle DFS algorithm shows the fastest solution, while A* algorithm is the slowest. <br/>
 For 15-puzzle each of DFS ans IDDFS algorithms shows fastest solutions, while A* algorithm is the lowest again. <br/>
-For 25-puzzle IDDFS algorithm is the fastest, and again A* algorithm is the lowest. <br/>
+For 25-puzzle IDDFS algorithm is the fastest, and again A* algorithm is the lowest. <br/><br/>
 ![Result113](https://github.com/shazaalqays/AI-Project/blob/master/pics/speed.jpg) <br/><br/>
 From the chart above we see that DFS and IDDFS both are good algorithm in solving such a problem.
 # Prepared by
