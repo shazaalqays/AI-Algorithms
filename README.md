@@ -694,6 +694,11 @@ def a_star_search(self, goal_state, heuristic_function):
                 print('Space performance:', str(queue_max_length), 'nodes in the queue at its max.')
                 return False
 ```
+# Results
+After checking everything let's run `all_puzzles.py`.
+## BFS results
+8-puzzle:
+![Result1](https://github.com/shazaalqays/AI-homework-1/tree/master/pics/8-bfs.jpg)
 # Conclusion
 When the depth of the tree is high all 4 algorithms are slow in finding the solution but when depth is not too high they are similar to each other but A* algorithm shows that it is faster.
 # Prepared by
