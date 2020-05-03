@@ -697,38 +697,38 @@ def a_star_search(self, goal_state, heuristic_function):
 # Results
 After checking everything let's run `all_puzzles.py`.
 ## BFS results
-8-puzzle: <br/>
-![Result1](https://github.com/shazaalqays/AI-Project/blob/master/pics/8-bfs.jpg) <br/>
-15-puzzle: <br/>
-![Result2](https://github.com/shazaalqays/AI-Project/blob/master/pics/15-bfs.jpg) <br/>
-24-puzzle: <br/>
-![Result3](https://github.com/shazaalqays/AI-Project/blob/master/pics/24-bfs.jpg) <br/>
+8-puzzle: <br/><br/>
+![Result1](https://github.com/shazaalqays/AI-Project/blob/master/pics/8-bfs.jpg) <br/><br/>
+15-puzzle: <br/><br/>
+![Result2](https://github.com/shazaalqays/AI-Project/blob/master/pics/15-bfs.jpg) <br/><br/>
+24-puzzle: <br/><br/>
+![Result3](https://github.com/shazaalqays/AI-Project/blob/master/pics/24-bfs.jpg) <br/><br/>
 ## DFS results
-8-puzzle: <br/>
-![Result4](https://github.com/shazaalqays/AI-Project/blob/master/pics/8-dfs.jpg) <br/>
-15-puzzle: <br/>
+8-puzzle: <br/><br/>
+![Result4](https://github.com/shazaalqays/AI-Project/blob/master/pics/8-dfs.jpg) <br/><br/>
+15-puzzle: <br/><br/>
 ![Result5](https://github.com/shazaalqays/AI-Project/blob/master/pics/15-dfs.jpg) <br/>
-24-puzzle: <br/>
-![Result6](https://github.com/shazaalqays/AI-Project/blob/master/pics/24-dfs.jpg) <br/>
+24-puzzle: <br/><br/>
+![Result6](https://github.com/shazaalqays/AI-Project/blob/master/pics/24-dfs.jpg) <br/><br/>
 ## ID-DFS results
-8-puzzle: <br/>
-![Result7](https://github.com/shazaalqays/AI-Project/blob/master/pics/8-iddfs.jpg) <br/>
-15-puzzle: <br/>
-![Result8](https://github.com/shazaalqays/AI-Project/blob/master/pics/15-iddfs.jpg) <br/>
-24-puzzle: <br/>
-![Result9](https://github.com/shazaalqays/AI-Project/blob/master/pics/24-iddfs.jpg) <br/>
+8-puzzle: <br/><br/>
+![Result7](https://github.com/shazaalqays/AI-Project/blob/master/pics/8-iddfs.jpg) <br/><br/>
+15-puzzle: <br/><br/>
+![Result8](https://github.com/shazaalqays/AI-Project/blob/master/pics/15-iddfs.jpg) <br/><br/>
+24-puzzle: <br/><br/>
+![Result9](https://github.com/shazaalqays/AI-Project/blob/master/pics/24-iddfs.jpg) <br/><br/>
 ## A* results
-8-puzzle: <br/>
-![Result10](https://github.com/shazaalqays/AI-Project/blob/master/pics/8-astar.jpg) <br/>
-15-puzzle: <br/>
-![Result11](https://github.com/shazaalqays/AI-Project/blob/master/pics/15-astar.jpg) <br/>
-24-puzzle: <br/>
-![Result12](https://github.com/shazaalqays/AI-Project/blob/master/pics/24-astar.jpg) <br/>
+8-puzzle: <br/><br/>
+![Result10](https://github.com/shazaalqays/AI-Project/blob/master/pics/8-astar.jpg) <br/><br/>
+15-puzzle: <br/><br/>
+![Result11](https://github.com/shazaalqays/AI-Project/blob/master/pics/15-astar.jpg) <br/><br/>
+24-puzzle: <br/><br/>
+![Result12](https://github.com/shazaalqays/AI-Project/blob/master/pics/24-astar.jpg) <br/><br/>
 # Conclusion
 In the following chart we notice that,<br/> 
 For 8-puzzle DFS algorithm shows the fastest solution, while A* algorithm is the slowest. <br/>
 For 15-puzzle each of DFS ans IDDFS algorithms shows fastest solutions, while A* algorithm is the lowest again. <br/>
-For 25-puzzle IDDFS algorithm is the fastest, and again A* algorithm is the lowest.
+For 25-puzzle IDDFS algorithm is the fastest, and again A* algorithm is the lowest. <br/>
 ![Result113](https://github.com/shazaalqays/AI-Project/blob/master/pics/speed.jpg) <br/><br/>
 From the chart above we see that DFS and IDDFS both are good algorithm in solving such a problem.
 # Prepared by
