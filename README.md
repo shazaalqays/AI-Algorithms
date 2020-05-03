@@ -698,32 +698,32 @@ def a_star_search(self, goal_state, heuristic_function):
 After checking everything let's run `all_puzzles.py`.
 ## BFS results
 8-puzzle: <br/>
-![Result1](https://github.com/shazaalqays/AI-Project/blob/master/pics/8-bfs.jpg)
+![Result1](https://github.com/shazaalqays/AI-Project/blob/master/pics/8-bfs.jpg) <br/>
 15-puzzle: <br/>
-![Result2](https://github.com/shazaalqays/AI-Project/blob/master/pics/15-bfs.jpg)
+![Result2](https://github.com/shazaalqays/AI-Project/blob/master/pics/15-bfs.jpg) <br/>
 24-puzzle: <br/>
-![Result3](https://github.com/shazaalqays/AI-Project/blob/master/pics/24-bfs.jpg)
+![Result3](https://github.com/shazaalqays/AI-Project/blob/master/pics/24-bfs.jpg) <br/>
 ## DFS results
 8-puzzle: <br/>
-![Result4](https://github.com/shazaalqays/AI-Project/blob/master/pics/8-dfs.jpg)
+![Result4](https://github.com/shazaalqays/AI-Project/blob/master/pics/8-dfs.jpg) <br/>
 15-puzzle: <br/>
-![Result5](https://github.com/shazaalqays/AI-Project/blob/master/pics/15-dfs.jpg)
+![Result5](https://github.com/shazaalqays/AI-Project/blob/master/pics/15-dfs.jpg) <br/>
 24-puzzle: <br/>
-![Result6](https://github.com/shazaalqays/AI-Project/blob/master/pics/24-dfs.jpg)
+![Result6](https://github.com/shazaalqays/AI-Project/blob/master/pics/24-dfs.jpg) <br/>
 ## ID-DFS results
 8-puzzle: <br/>
-![Result7](https://github.com/shazaalqays/AI-Project/blob/master/pics/8-iddfs.jpg)
+![Result7](https://github.com/shazaalqays/AI-Project/blob/master/pics/8-iddfs.jpg) <br/>
 15-puzzle: <br/>
-![Result8](https://github.com/shazaalqays/AI-Project/blob/master/pics/15-iddfs.jpg)
+![Result8](https://github.com/shazaalqays/AI-Project/blob/master/pics/15-iddfs.jpg) <br/>
 24-puzzle: <br/>
-![Result9](https://github.com/shazaalqays/AI-Project/blob/master/pics/24-iddfs.jpg)
+![Result9](https://github.com/shazaalqays/AI-Project/blob/master/pics/24-iddfs.jpg) <br/>
 ## A* results
 8-puzzle: <br/>
-![Result10](https://github.com/shazaalqays/AI-Project/blob/master/pics/8-astar.jpg)
+![Result10](https://github.com/shazaalqays/AI-Project/blob/master/pics/8-astar.jpg) <br/>
 15-puzzle: <br/>
-![Result11](https://github.com/shazaalqays/AI-Project/blob/master/pics/15-astar.jpg)
+![Result11](https://github.com/shazaalqays/AI-Project/blob/master/pics/15-astar.jpg) <br/>
 24-puzzle: <br/>
-![Result12](https://github.com/shazaalqays/AI-Project/blob/master/pics/24-astar.jpg)
+![Result12](https://github.com/shazaalqays/AI-Project/blob/master/pics/24-astar.jpg) <br/>
 # Conclusion
 When the depth of the tree is high all 4 algorithms are slow in finding the solution but when depth is not too high they are similar to each other but A* algorithm shows that it is faster.
 # Prepared by
