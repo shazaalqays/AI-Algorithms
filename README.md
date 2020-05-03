@@ -697,32 +697,32 @@ def a_star_search(self, goal_state, heuristic_function):
 # Results
 After checking everything let's run `all_puzzles.py`.
 ## BFS results
-8-puzzle:
+8-puzzle: <br/>
 ![Result1](https://github.com/shazaalqays/AI-Project/blob/master/pics/8-bfs.jpg)
-15-puzzle:
+15-puzzle: <br/>
 ![Result2](https://github.com/shazaalqays/AI-Project/blob/master/pics/15-bfs.jpg)
-24-puzzle:
+24-puzzle: <br/>
 ![Result3](https://github.com/shazaalqays/AI-Project/blob/master/pics/24-bfs.jpg)
 ## DFS results
-8-puzzle:
+8-puzzle: <br/>
 ![Result4](https://github.com/shazaalqays/AI-Project/blob/master/pics/8-dfs.jpg)
-15-puzzle:
+15-puzzle: <br/>
 ![Result5](https://github.com/shazaalqays/AI-Project/blob/master/pics/15-dfs.jpg)
-24-puzzle:
+24-puzzle: <br/>
 ![Result6](https://github.com/shazaalqays/AI-Project/blob/master/pics/24-dfs.jpg)
 ## ID-DFS results
-8-puzzle:
+8-puzzle: <br/>
 ![Result7](https://github.com/shazaalqays/AI-Project/blob/master/pics/8-iddfs.jpg)
-15-puzzle:
+15-puzzle: <br/>
 ![Result8](https://github.com/shazaalqays/AI-Project/blob/master/pics/15-iddfs.jpg)
-24-puzzle:
+24-puzzle: <br/>
 ![Result9](https://github.com/shazaalqays/AI-Project/blob/master/pics/24-iddfs.jpg)
 ## A* results
-8-puzzle:
+8-puzzle: <br/>
 ![Result10](https://github.com/shazaalqays/AI-Project/blob/master/pics/8-astar.jpg)
-15-puzzle:
+15-puzzle: <br/>
 ![Result11](https://github.com/shazaalqays/AI-Project/blob/master/pics/15-astar.jpg)
-24-puzzle:
+24-puzzle: <br/>
 ![Result12](https://github.com/shazaalqays/AI-Project/blob/master/pics/24-astar.jpg)
 # Conclusion
 When the depth of the tree is high all 4 algorithms are slow in finding the solution but when depth is not too high they are similar to each other but A* algorithm shows that it is faster.
