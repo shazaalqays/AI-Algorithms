@@ -1,4 +1,4 @@
-# AI-Project
+# AI Algorithms
 In a 8-15-24 puzzle we have to find the solution using BFS, DFS, ID, and A*.
 # Getting started
 In order to work with puzzle we will use `numpy` library to work with matrices, and `time` library to calculate time spent.
@@ -732,4 +732,4 @@ For 25-puzzle IDDFS algorithm is the fastest, and again A* algorithm is the lowe
 ![Result113](https://github.com/shazaalqays/AI-Project/blob/master/pics/speed.jpg) <br/><br/>
 From the chart above we see that DFS and IDDFS both are good algorithm in solving such a problem.
 # Prepared by
-Chaza Alkis 13011908 and Derya Akcakaya 13011053
+Chaza Alkis
